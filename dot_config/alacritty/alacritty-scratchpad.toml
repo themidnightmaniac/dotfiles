@@ -1,0 +1,12 @@
+[font]
+normal = { family = "Terminus", style = "Regular" }
+size = 10
+
+[window]
+
+opacity = 0.85
+
+dimensions = { columns = 75, lines = 35 }
+position = { x = 0, y = 0 }
+
+

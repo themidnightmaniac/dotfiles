@@ -1,0 +1,2 @@
+#/bin/sh
+gallery-dl $1 --exec-after "cd {_directory} && convert * ../doc.pdf"

@@ -1,0 +1,120 @@
+# History-related
+HISTFILE=~/.log/zsh/histfile
+HISTSIZE=1000
+SAVEHIST=10000
+setopt sharehistory
+setopt extendedhistory
+
+# Enable colors and change prompt:
+autoload -U colors && colors
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+
+# Superglobs
+setopt autocd extendedglob
+setopt extendedglob
+unsetopt caseglob
+setopt auto_cd
+
+# Remember command without executing it
+# setopt interactivecomments
+
+# Display CPU usage after 10 seconds
+REPORTTIME=5
+
+# Autocompletion-related
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+# ls colors
+if [[ -x "`whence -p dircolors`" ]]; then
+  eval `dircolors`
+  alias ls='ls -F --color=auto'
+else
+  alias ls='ls -F'
+fi
+
+# ls shortcuts
+
+alias ll='ls -l'
+alias la='ls -a'
+
+bindkey -v
+
+zstyle :compinstall filename '/home/ncho/.zshrc'
+
+autoload -Uz compinit
+compinit
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+. "${HOME}/.cache/wal/colors.sh"
+
+#PS1='[\u@\h \W]\$ '
+
+#PS1='\W > '
+#PS1='[%T]-[%n@%m]:%~# '
+
+# Import colorscheme from 'wal' asynchronously
+# &   # Run the process in the background.
+# ( ) # Hide shell job control messages.
+(cat ~/.cache/wal/sequences &)
+
+#Aliases:
+## Load aliases and shortcuts if existent.
+[ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
+[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+
+alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
+alias ncmpcpp='ncmpcpp ncmpcpp_directory=$HOME/.config/ncmpcpp/'
+alias dmen='dmenu_run -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"'
+alias makeclr='sh makeclr'
+alias wget='wget --config="/home/ncho/.wgetrc --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias zerotiermenu='sh zerotier'
+alias minecraft='killall picom && minecraft-launcher'
+alias yt-dlp-music='yt-dlp -x --audio-quality 0 --audio-format m4a'
+alias xbindkeys_config='xbindkeys_config -f .config/xbindkeys/config/.xbindkeysrc'
+alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
+alias music='tmux new-session -s $$ "tmux source-file ~/.config/ncmpcpp/tsession"'
+_trap_exit() { tmux kill-session -t $$; }
+alias cl='clear'
+alias eh-dload='gallery-dl $1 --exec-after "cd {_directory} && convert * ../doc.pdf"'
+alias pdfconv='convert $(find -maxdepth 1 -type f -name *.jpg | sort -n | paste -sd\ ) output.pdf'
+
+source /home/ncho/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#Key Bindings
+bindkey -s '^A' 'clear\n'

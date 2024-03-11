@@ -1,0 +1,75 @@
+#!/bin/bash
+uline=$(tput smul)
+uline_end=$(tput rmul)
+end=$(tput sgr0)
+bold=$(tput bold)
+while true;do
+
+    read -p "Is ${uline}$1${uline_end} correct? (y/N) " yn
+  
+    case $yn in
+        [Yy]*) break;;
+        [Nn]*) exit 0;;
+            *) echo "Try again";;
+    
+    esac
+
+done
+
+echo
+
+echo "----------------------------------------------------------------------------"
+
+echo
+
+echo "Setting ${uline}$1${uline_end} as your wallpaper"
+
+nitrogen --set-zoom-fill $1 2> /dev/null
+
+echo
+
+echo "----------------------------------------------------------------------------"
+
+echo
+
+echo "Aplying color scheme"
+
+echo
+
+wal -i $1
+
+echo
+
+echo "----------------------------------------------------------------------------"
+
+echo
+
+echo "Re-building dwm"
+
+echo
+
+cd $HOME/.local/src/dwm/
+
+cp config.def.h config.h
+
+sudo make install
+
+echo
+
+echo "----------------------------------------------------------------------------"
+
+echo
+
+read -p "Do you want to restart dwm now? ${bold}You will be logged out. ${end}(y/N) " yn
+   
+    echo
+    
+    case $yn in
+
+     [Yy]*) killall Xorg;;
+     [Nn]*) exit 0;;
+     *) echo "Try again";;
+         
+    esac
+
+echo
