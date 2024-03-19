@@ -1,16 +1,19 @@
 @Software Releases [60]
 https://github.com/keepassxreboot/keepassxc/releases.atom "Keepassxc Release Notes"
+$(cat ~/.config/newsraft/le-feeds/arch.rss) "Arch Linux News"
+$(cat ~/.config/newsraft/le-feeds/newsraft.rss) "Newsraft Release Notes"
+https://www.getmonero.org/feed.xml "Monero Release Notes"
 
 @Blogs [30]
 https://lukesmith.xyz/index.xml "Luke Smith Website"
 https://steelrods.hashnode.dev/rss.xml "Steel Rods"
 https://sizeof.cat/index.xml "sizeof(cat)"
 
-@News
-https://www.getmonero.org/feed.xml "Monero News"
+@News [10]
 https://www.defectivebydesign.org/blog/feed "Defective By Desing"
 https://static.fsf.org/fsforg/rss/news.xml "FSF News"
 https://reclaimthenet.org/wp-json/wp/v2/pages/61430 "Reclaim The Net"
+https://rss.vatican.va/xml/rss_en.xml "Vatican"
 
 @Youtube/Odysee [30]
 https://odysee.com/$/rss/@Luke:7 "Luke Smith"
@@ -25,3 +28,7 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UC0RBTQIYLEQbcahZWkmzeTQ "Ga
 https://odysee.com/$/rss/@MidnightBroadcast:f "Midnight Broadcast"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCCqsTK0z4Gow1_IZ45fR1Ag "The Based Farm"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCjRKVS7aiGgwqWfVYXl1bjA "Galahad Eridanus"
+
+@Other Media
+https://lukesmith.xyz/lindy.xml "LindyPress Books" [120]
+https://feeds.redcircle.com/14998969-fa6d-4c2b-a277-ccbc4ec92d4c "Capitan Blackbeard Radio" [120]

@@ -37,6 +37,9 @@ return {
             lspconfig.bashls.setup({
                 capabilities = capabilities
             })
+            lspconfig.rust_analyzer.setup({
+                capabilities = capabilities
+            })
             vim.keymap.set("n", "<leader>df", vim.lsp.buf.definition, {})
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
         end,

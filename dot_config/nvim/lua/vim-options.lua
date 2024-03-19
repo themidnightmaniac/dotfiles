@@ -14,3 +14,12 @@ vim.o.nohlsearch = true
 vim.keymap.set("i", "jj", "<ESC>")
 vim.keymap.set("n", "<leader>qq", ":q!<CR>")
 vim.keymap.set("n", "<leader>wq", ":wq<CR>")
+vim.keymap.set("n", "<C-s>s", ":LiveServerStart<CR>")
+vim.keymap.set("n", "<C-s>x", ":LiveServerStop<CR>")
+vim.keymap.set("n", "<F12>", ":set spell!<CR>")
+vim.keymap.set("n", "<F11>", ":set spelllang=en_us<CR>")
+vim.keymap.set("n", "<F10>", ":set spelllang=pt_br<CR>")
+
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
+

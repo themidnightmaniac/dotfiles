@@ -1,5 +1,5 @@
 set menu-feed-sorting alphabet-asc
 set menu-item-sorting time-desc
 set pager-width 0
-bind m exec mpv "%l"
-bind f exec feh "%l"
+bind m exec open-in-mpv "%l"
+bind f exec open-in-feh "%l"
