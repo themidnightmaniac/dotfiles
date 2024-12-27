@@ -1,0 +1,89 @@
+###########################
+# xbindkeys configuration #
+###########################
+#
+# The format of a command line is:
+#    "command to start"
+#       associated key
+#
+# List of modifier:
+#   Release, Control, Shift, Mod1 (Alt), Mod2 (NumLock),
+#   Mod3 (CapsLock), Mod4, Mod5 (Scroll).
+#
+#keystate_numlock = enable
+#keystate_capslock = enable
+#keystate_scrolllock= enable
+
+# Increase volume
+"wpctl set-volume @DEFAULT_SINK@ 2%+&&pkill -RTMIN+4 dwmblocks"
+	XF86AudioRaiseVolume
+
+# Decrease volume
+"wpctl set-volume @DEFAULT_SINK@ 2%-&&pkill -RTMIN+4 dwmblocks"
+	XF86AudioLowerVolume
+
+# Mute volume
+"wpctl set-mute @DEFAULT_SINK@ toggle&&pkill -RTMIN+4 dwmblocks"
+	XF86AudioMute
+
+# Increase brightness
+"xbacklight -inc 2"
+	XF86MonBrightnessUp 
+
+# Decrease brightness
+"xbacklight -dec 2"
+	XF86MonBrightnessDown
+
+# Toggle music
+"mpc toggle&&pkill -RTMIN+1 dwmblocks"
+	Mod4 + Shift + P
+
+# Stop music
+"mpc stop&&pkill -RTMIN+1 dwmblocks"
+	Mod4 + Shift + O
+
+# Clear queue
+"mpc clear&&pkill -RTMIN+1 dwmblocks"
+	Mod4 + Shift + I
+
+# Populate queue
+"mpc ls | mpc add&&pkill -RTMIN+1 dwmblocks"
+	Mod4 + Shift + U
+
+# Next song
+#"mpc next&&pkill -RTMIN+1 dwmblocks"
+"mpc next"
+	Mod4 + Shift + period
+
+# Prev song
+#"mpc prev&&pkill -RTMIN+1 dwmblocks"
+"mpc prev"
+	Mod4 + Shift + comma
+
+# Kill wireless
+"rfkill toggle all"
+	m:0x0 + c:246
+	XF86WLAN
+
+# Togggle redshift
+"pkill -USR1 redshift"
+    m:0x0 + c:157
+    XF86Launch2
+# Lock screen
+"lock-screen"
+    m:0x40 + c:46
+    Mod4 + l
+
+# Shutdown
+"loginctl poweroff"
+    m:0x41 + c:53
+    Shift+Mod4 + x
+
+# Reboot
+"loginct reboot"
+    m:0x41 + c:27
+    Shift+Mod4 + r
+
+##################################
+# End of xbindkeys configuration #
+##################################
