@@ -1,0 +1,3 @@
+notification-command " "
+bind f exec feh "%l"
+bind m exec mpv --no-terminal "%l" &

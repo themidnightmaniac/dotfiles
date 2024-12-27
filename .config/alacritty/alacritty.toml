@@ -1,0 +1,25 @@
+[window]
+decorations = "None"
+opacity = 0.8
+title = "Terminal"
+dynamic_title = true
+decorations_theme_variant = "Dark"
+
+[scrolling]
+history = 500
+multiplier = 5
+
+[font]
+normal = { family = "Terminess Nerd Font Mono", style = "Regular" }
+size = 11.25
+
+[cursor]
+blink_timeout = 15
+
+[mouse]
+hide_when_typing = true
+
+[keyboard]
+bindings = [
+{ key = "+", mods = "Control|Shift", action = "ResetFontSize" }
+]
