@@ -1,0 +1,4 @@
+#!/bin/sh
+/usr/bin/pkill -RTMIN+7 dwmblocks;
+sleep 2;
+/usr/bin/pkill -RTMIN+7 dwmblocks;

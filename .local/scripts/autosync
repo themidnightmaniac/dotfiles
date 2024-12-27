@@ -1,0 +1,81 @@
+#!/bin/bash
+# autosync
+# Syncs directories (or files) from the PC to external storage.
+# Items to sync are specified in a .shared file in the drive (no the PC)
+# Drive shortcuts should be put in $XDG_CONFIG_DIR/autosync-drives
+
+SYNCID="$(for i in {1..5}; do printf "%s" $((1 + $RANDOM % 9)); done)"
+
+source "${XDG_CONFIG_HOME}/autosync-drives"
+
+exit_autosync(){
+	if [[ ! -n $1 ]]; then exit 1; fi
+	if [[ ! $2 -ge 0 ]]; then exit 1; fi
+    if [[ -f "$logfile" ]]; then printf "$1\n" >> $logfile; fi
+    dunstify "Autosync Failed!" "Remember to check the logs!" -u 2 -t 10000;
+    exit "$2";
+}
+
+sync_stuff(){
+	if [[ ! -n $1 ]]; then exit 1; fi
+	sync_path=$1
+	if ! [ -d "$sync_path" ]; then exit_autosync "Mount path not found!" 1; fi
+	if ! [ -f "$sync_path/.shared" ]; then exit_autosync """No .shared Found!\
+		\nPlease put a file named .shared in $sync_path\
+		\nwith the folders you want synced from the PC!""" 1
+	fi
+	
+    dunstify "Sync started!" "This will take a while..." -u 1 -t 10000;
+
+	logfile="$sync_path/autosync.log"
+
+	printf "==========================================================================\n\n" >> $logfile
+	printf "START %s - ID:%s\n" "$(date +"%H:%M:%S - %Y/%m/%d")" "$SYNCID" >> $logfile
+
+	to_sync="$(cat $sync_path/.shared)"
+	for folder in $to_sync; do
+		printf "Copying %s to %s...\n" $folder $sync_path >> $logfile
+		rsync -acq --ignore-existing --no-whole-file --exclude="Coding" "$folder" "$sync_path" >> $logfile;
+		if [ "$?" -ne 0 ]; then printf "Erros ocurred during transfer!\n" >> $logfile; fi 
+		printf "Done copying %s to %s!\n" $folder $sync_path >> $logfile
+	done
+
+	printf "FINISH %s - ID:%s\n" "$(date +"%H:%M:%S - %Y/%m/%d")" "$SYNCID" >> $logfile
+	printf "\n========================================================================\n\n" >> $logfile
+
+    dunstify "Sync done!" "Remember to check the logs!" -u 1 -t 10000;
+
+	exit 0
+}
+
+wait_for_mount()
+{
+	i=0;
+    while true; do
+
+		if [ "$i" -ge 5 ]; then
+			echo "Drive doesn't appear to be mounted! Please mount it to /run/media/$(whoami)/$2";
+			exit_autosync "-" 1;
+		fi;
+
+		if [[ "$(ls "$1" 2>/dev/null)" ]]; then
+			sync_path="$1" && break;
+        else
+			sleep 5;
+			((i++));
+		fi;
+
+    done;
+	sync_stuff $sync_path
+}
+
+trap "exit_autosync 'Program Terminated! Exiting...' 1" ERR SIGINT SIGTERM
+
+if [ -z "$1" ]; then
+	echo "No drive provided! Please input the drive name lowercase.";
+	false
+else
+	wait_for_mount "${!1}" $1;
+fi
+    
+exit 1

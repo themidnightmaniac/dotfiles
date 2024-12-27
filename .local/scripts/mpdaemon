@@ -1,0 +1,37 @@
+#!/bin/sh
+# MPDaemon
+# Constantly polls mpd for song changes
+# and executes a command when it happens.
+# You can execute this script from .xinitrc
+# or use a systemd unit.
+
+set -eE
+
+ID="$(for i in {1..4}; do printf "%s" $((1 + $RANDOM % 9)); done)"
+
+function abort {
+	printf "..END-%s-%s\n" "$(date +"%y/%m/%d-%H:%M:%S")" $ID;
+	exit "$1";
+};
+
+trap "abort 1" SIGINT SIGKILL ERR SIGTERM;
+
+printf "START-%s-%s\n" "$(date +"%y/%m/%d-%H:%M:%S")" "$ID"
+
+function update {
+	if [ "$(pgrep dunst)" ]; then killall dunst 2> /dev/null; fi
+	#notify-send -u low "Now playing:" "$1";
+	printf "NOW PLAYING: %s\n" "$1";
+	pkill -RTMIN+1 dwmblocks;
+};
+
+ps="-"
+
+while true; do
+	cs="$(mpc current)";
+	if [[ "$cs" != "$ps" ]]; then
+		update "$cs";
+		ps="$cs";
+		fi;
+	sleep 1;
+done

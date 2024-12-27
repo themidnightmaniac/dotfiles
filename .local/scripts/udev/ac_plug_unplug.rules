@@ -1,0 +1,1 @@
+ACTION=="change", SUBSYSTEM=="power_supply", KERNEL=="ADP1", RUN+="/bin/sh /home/ncho/.local/scripts/update-bar-battery"

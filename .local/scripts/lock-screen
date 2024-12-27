@@ -1,0 +1,5 @@
+#!/bin/sh
+if [ ! -z $(pgrep picom) ]; then killall picom 1>/dev/null;fi
+slock -m "$(cowsay lmao git lokd\' out)" &&
+picom -b
+exit
