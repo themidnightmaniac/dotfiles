@@ -97,6 +97,7 @@ alias updateblocks='for i in {1..6}; do pkill -RTMIN+"$i" dwmblocks;done;unset i
 alias reboot='loginctl reboot'
 alias poweroff='loginctl poweroff'
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
 #Terminal Bindings
 
