@@ -1,5 +1,7 @@
 #!/bin/sh
 if [ ! -z $(pgrep picom) ]; then killall picom 1>/dev/null;fi
-slock -m "$(cowsay lmao git lokd\' out)" &&
+slock -m "$(fortune)" &&
+#slock -m "$(cowsay -r -W 42 "lel git locked out")" &&
 picom -b
 exit
+
