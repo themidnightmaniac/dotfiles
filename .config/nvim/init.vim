@@ -61,4 +61,7 @@ nmap <silent> <M-L> :+tabnext<cr>
 nmap <silent> <M-H> :-tabnext<cr>
 nmap <silent> <M-J> mz:m+<cr>`z
 nmap <silent> <M-K> mz:m-2<cr>`z
+map <silent> <leader>qq :q!<cr>
+map <silent> <leader>q :q<cr>
+map <silent> <leader>wq :wq<cr>
 

@@ -1,28 +1,33 @@
-#History
+# My personal .zshrc. Pretty cool huh
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# History
 HISTFILE=$HOME/.log/histfile
 HISTSIZE=1000
 SAVEHIST=10000
 setopt sharehistory
 setopt extendedhistory
 
-#Enable Colors and Customize the Promt
+# Enable colors and customize the promt
 autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
-#Super Globs
+# Super globs
 setopt autocd extendedglob
 setopt extendedglob
 setopt auto_cd
 unsetopt caseglob
 
-#Remember a Command Without Executing it
+# Remember a command without executing it
 setopt interactivecomments
 
-#Display Usage After 10 Seconds
+# Display usage after 10 seconds
 REPORTTIME=10
 
-#Autocompletion
-autoload -U compinit
+# Autocompletion
+autoload -Uz compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
@@ -36,7 +41,7 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
 
-# Change cursor shape for different vi modes.
+# Change cursor shape for different vi-like modes.
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
      [[ $1 = 'block' ]]; then
@@ -48,16 +53,18 @@ function zle-keymap-select {
     echo -ne '\e[5 q'
   fi
 }
+
+# Initialize vi-like mode
 zle -N zle-keymap-select
 zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    zle -K viins
     echo -ne "\e[5 q"
 }
 zle -N zle-line-init
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+echo -ne '\e[5 q'
+preexec() { echo -ne '\e[5 q' ;}
 
-#ls Colors
+# ls colors
 if [[ -x "`whence -p dircolors`" ]]; then
   eval `dircolors`
   alias ls='ls -F --color=auto'
@@ -65,43 +72,32 @@ else
   alias ls='ls -F'
 fi
 
+# ?
 bindkey -v
 
-zstyle :compinstall filename '/home/ncho/.config/zsh/.zshrc'
-
-autoload -Uz compinit
-compinit
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-alias ls='ls --color=auto'
+# grep colors
 alias grep='grep --color=auto'
 
+# Load wal colorscheme
 . "${HOME}/.cache/wal/colors.sh" 2> /dev/null
-# Import Colorscheme From 'wal' Asynchronously
-# &   # Run the Process In The Background.
-# ( ) # Hide Shell Job Control Messages.
 (cat ~/.cache/wal/sequences 2> /dev/null &)
 
-#Aliases:
-[ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+# Aliases:
 
-alias news='newsraft'
-alias detach='udiskie-umount --force --detach'
-alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 alias ll='ls -l'
 alias la='ls -a'
+alias news='newsraft'
+alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 alias xbindkeys='xbindkeys -f $HOME/.config/.xbindkeysrc'
 alias updateblocks='for i in {1..6}; do pkill -RTMIN+"$i" dwmblocks;done;unset i'
-alias reboot='loginctl reboot'
-alias poweroff='loginctl poweroff'
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias reboot='loginctl reboot'
+alias poweroff='loginctl poweroff'
 
-#Terminal Bindings
+# Scripts
 
-# Set Wallpaper Script
+# Set Wallpaper 
 setwall () {
 	if [[ -z "{$2}" ]]; then return 1; fi
 	if [[ -f "${1}" && ! -z "${1}" ]]; then
@@ -116,7 +112,7 @@ setwall () {
 	return 0;
 }
 
-#Extract Script
+# Extract 
 extract () {
    if [ -f $1 ] ; then
 
@@ -139,4 +135,5 @@ extract () {
    fi
 }
 
+# Enable syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
