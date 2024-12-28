@@ -13,14 +13,13 @@ xset -dpms
 /usr/bin/pipewire &
 /usr/bin/pipewire-pulse &
 /usr/bin/wireplumber &
-mpd "$HOME/.config/mpd/mpd.conf" &
+mpd --kill; mpd "$HOME/.config/mpd/mpd.conf" &
 picom -b &
 dwmblocks &
 xwallpaper $(cat $HOME/.local/share/wallpaper) &
 xbindkeys -f $HOME/.config/.xbindkeysrc &
-sh .local/scripts/mpdaemon &
 redshift &
 mpdaemon &
-updateblocks &
 xss-lock lock-screen&
+updateblocks &
 exec dbus-run-session dwm
