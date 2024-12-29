@@ -1,0 +1,54 @@
+-- Check the news
+$ news
+
+-- Update non system packages
+...
+
+-- Check for old config files
+...
+
+-- Update the system
+# pacman -Syu # Act promptly on errors
+
+- Reboot on kernel updates
+$ reboot
+
+-- Remove orphaned packages
+# pacman -Qtd | pacman -Rsn -
+
+-- Clean package cache
+# pacman -Sc
+
+-- Backup package list and database
+$ pacman -Qqe > pkglist.txt
+$ tar -cjf pacman_database.tar.bz2 /var/lib/pacman/local 
+
+-- Clean the filesystem
+- Duplicates cache etc
+$ bleachbit
+
+- Scrub
+# btrfs scrub start /
+
+- Balance (after the scrub is done)
+# btrfs balance start --bg /
+
+- Defrag (after the balance is done)
+# btrfs filesystem defragment -r /
+
+- Dedupe (after the defrag is done)
+# duperemove -r /home/user (check)
+# duperemove -dr (on the found directories)
+
+- Check dmesg
+# dmesg
+
+- Backup dotfiles
+$ dotfiles status
+$ dotfiles add (changes)
+$ dotfiles commit -m (changes)
+
+- Reboot
+$ reboot
+
+done (:
