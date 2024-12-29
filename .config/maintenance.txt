@@ -1,20 +1,31 @@
 -- Check the news
 $ news
 
--- Update non system packages
+-- Update manually installed packages
 ...
 
 -- Check for old config files
-...
+$ ls .config
+$ ls .cache
+$ ls .local/share
+
+-- Check for unused packages
+$ checkpgk
 
 -- Update the system
-# pacman -Syu # Act promptly on errors
+# pacman -Syu
 
-- Reboot on kernel updates
+- Reboot on kernel upgrades
 $ reboot
 
 -- Remove orphaned packages
 # pacman -Qtd | pacman -Rsn -
+
+-- Check for non-libre packages
+$ absolutely-proprietary
+
+-  Remove them, if possible
+...
 
 -- Clean package cache
 # pacman -Sc
@@ -23,8 +34,11 @@ $ reboot
 $ pacman -Qqe > pkglist.txt
 $ tar -cjf pacman_database.tar.bz2 /var/lib/pacman/local 
 
+-- Firecfg if new apps were installed
+$ sudo firecfg
+
 -- Clean the filesystem
-- Duplicates cache etc
+- Duplicates common cache etc
 $ bleachbit
 
 - Scrub
@@ -40,7 +54,7 @@ $ bleachbit
 # duperemove -r /home/user (check)
 # duperemove -dr (on the found directories)
 
-- Check dmesg
+- Check dmesg for fs errors
 # dmesg
 
 - Backup dotfiles
