@@ -94,6 +94,7 @@ alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias reboot='loginctl reboot'
 alias poweroff='loginctl poweroff'
+alias listpkg="pacman -Qqe | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
 # Scripts
 

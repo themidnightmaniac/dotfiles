@@ -84,6 +84,10 @@
     m:0x41 + c:27
     Shift+Mod4 + r
 
+# Update blocks
+"for i in {1..6}; do pkill -RTMIN+"$i" dwmblocks;done"
+    Mod4 + u
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
