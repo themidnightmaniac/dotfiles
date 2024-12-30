@@ -10,7 +10,7 @@ $ ls .cache
 $ ls .local/share
 
 -- Check for unused packages
-$ checkpgk
+$ listpkg 
 
 -- Update the system
 # pacman -Syu
