@@ -1,1 +1,0 @@
-ACTION=="add", SUBSYSTEM=="intel_backlight", RUN+="/bin/chgrp video $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"

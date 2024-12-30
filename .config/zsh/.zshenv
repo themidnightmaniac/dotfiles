@@ -19,4 +19,4 @@ export player="mpd"
 export EDITOR="nvim"
 export VISUAL="nvim"
 
-PATH=/usr/local/bin/:$HOME/.local/bin:$PATH
+PATH="$HOME/.local/bin:$PATH"

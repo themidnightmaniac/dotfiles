@@ -1,3 +1,0 @@
-#!/bin/bash
-if [[ $1 == "home" ]]; then df -H /dev/mapper/root | tr -d '\n' | awk '{print $10}';
-else printf "hdd or home"; fi;

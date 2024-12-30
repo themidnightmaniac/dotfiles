@@ -1,3 +1,0 @@
-#!/bin/sh
-# Just refresh the network display
-pkill -RTMIN+6 dwmblocks;

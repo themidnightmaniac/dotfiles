@@ -1,7 +1,0 @@
-#!/bin/bash
-ping -c 1 seedbox.local > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo 󰒋 
-else
-    echo 󰒏 
-fi

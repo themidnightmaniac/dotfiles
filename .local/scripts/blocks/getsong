@@ -1,9 +1,0 @@
-#!/bin/bash
-if [[ $(mpc current) ]]; then
-    printf " " && mpc \
-        | head -2 \
-        | tail -1 \
-        | grep -o "\\[[a-z]*\\]" \
-        | tr -d '[]\n' \
-        | sed 's/.*/\u&/' && printf ": " && mpc -f %title% current; fi
-
