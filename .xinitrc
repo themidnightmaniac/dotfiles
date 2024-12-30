@@ -17,7 +17,7 @@ mpd --kill; mpd "$HOME/.config/mpd/mpd.conf" &
 picom -b &
 dwmblocks &
 xwallpaper $(cat $HOME/.local/share/wallpaper) &
-xbindkeys -f $HOME/.config/.xbindkeysrc &
+xbindkeys -f $HOME/.config/xbindkeysrc &
 redshift &
 mpdaemon &
 xss-lock lock-screen&
