@@ -1,0 +1,28 @@
+#!/bin/sh
+charging=$(sed 's/Charging/󰅃/;s/Discharging/󰅀/;s/Not charging/-/;s/Full/󱐋/' /sys/class/power_supply/BAT1/status)
+charge=$(cat /sys/class/power_supply/BAT1/capacity)
+case $charge in
+	[0-9])
+	charge_sym="󰂎";;
+	1[0-9])
+	charge_sym="󰁺";;
+	2[0-9])
+	charge_sym="󰁻";;
+	3[0-9])
+	charge_sym="󰁼";;
+	4[0-9])
+	charge_sym="󰁽";;
+	5[0-9])
+	charge_sym="󰁾";;
+	6[0-9])
+	charge_sym="󰁿";;
+	7[0-9])
+	charge_sym="󰂀";;
+	8[0-9])
+	charge_sym="󰂁";;
+	9[0-9])
+	charge_sym="󰂂";;
+	100)
+	charge_sym="󰁹";;
+esac
+printf '%s %s %i%%\n' $charging $charge_sym $charge
