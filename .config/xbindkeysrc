@@ -38,6 +38,10 @@
 "mpc toggle&&pkill -RTMIN+1 dwmblocks"
 	Mod4 + Shift + P
 
+# Toggle Music (Keyboard/Earbuds support)
+"mpc toggle&&pkill -RTMIN+1 dwmblocks"
+    XF86AudioPlay
+
 # Stop music
 "mpc stop&&pkill -RTMIN+1 dwmblocks"
 	Mod4 + Shift + O
@@ -69,6 +73,7 @@
 "pkill -USR1 redshift"
     m:0x0 + c:157
     XF86Launch2
+
 # Lock screen
 "lock-screen"
     m:0x40 + c:46

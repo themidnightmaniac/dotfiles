@@ -1,9 +1,5 @@
 # Source secret env
-#. $ZDOTDIR/.zshenv-secret
-
-# Get screen widht and height
-export DISPLAY_WIDTH=$(xrandr | grep '*' | awk '{print $1}' | cut -d 'x' -f 1 | head)
-export DISPLAY_HEIGHT=$(xrandr | grep '*' | awk '{print $1}' | cut -d 'x' -f 2 | head)
+. $ZDOTDIR/.zshenv-secret
 
 # Clear the terminal from any errors
 clear

@@ -12,20 +12,20 @@ $ ls .local/share
 -- Check for unused packages
 $ listpkg 
 
--- Update the system
-# pacman -Syu
-
-- Reboot on kernel upgrades
-$ reboot
-
 -- Remove orphaned packages
 # pacman -Qtd | pacman -Rsn -
 
 -- Check for non-libre packages
 $ absolutely-proprietary
 
--  Remove them, if possible
+-  Remove or change them, if possible
 ...
+
+-- Upgrade the system
+# pacman -Syu
+
+- Reboot on kernel upgrades
+$ reboot
 
 -- Clean package cache
 # pacman -Sc
