@@ -16,10 +16,10 @@ xset -dpms
 mpd --kill; mpd "$HOME/.config/mpd/mpd.conf" &
 picom -b &
 dwmblocks &
-xwallpaper $(cat $HOME/.local/share/wallpaper) &
 xbindkeys -f $HOME/.config/xbindkeysrc &
 redshift &
 mpdaemon &
-xss-lock lock-screen&
+xss-lock lock-screen &
 updateblocks &
+xwallpaper $(cat $HOME/.local/share/wallpaper)
 exec dbus-run-session dwm
